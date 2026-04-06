@@ -3,7 +3,7 @@ package com.kcthomas.data
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RemoteDogSource {
+class DogService {
 
     // Inject into constructor via Hilt in PROD
     private val api = Retrofit.Builder()
@@ -12,5 +12,5 @@ class RemoteDogSource {
         .build()
         .create(DogApi::class.java)
 
-    suspend fun getDogs(): DogData? = api.getDogs()
+    suspend fun getDogs(): DogDto? = api.getDogs()
 }

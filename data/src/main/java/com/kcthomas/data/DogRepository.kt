@@ -6,7 +6,7 @@ import kotlinx.coroutines.withContext
 class DogRepository {
 
     // Inject into constructor via Hilt in PROD
-    private val remoteSource = RemoteDogSource()
+    private val remoteSource = DogService()
 
     suspend fun getDogs() = withContext(Dispatchers.IO) {
         try {

@@ -6,5 +6,5 @@ private const val MAX_IMAGES = 50
 
 interface DogApi {
     @GET("api/breeds/image/random/$MAX_IMAGES")
-    suspend fun getDogs(): DogData?
+    suspend fun getDogs(): DogDto?
 }
