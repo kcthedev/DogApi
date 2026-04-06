@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
 
     data class ViewState(
-//        val imageUrl: String? = null
         val imageUrls: List<String> = emptyList()
     )
 
@@ -22,38 +21,20 @@ class MainViewModel : ViewModel() {
     private val repository = DogRepository()
 
     init {
-//        loadDog()
         loadDogs()
     }
 
-//    fun loadDog() {
-//        viewModelScope.launch {
-//            repository.getDog().let { dog ->
-//                if (dog != null) {
-//                    _viewState.update {
-//                        it.copy(imageUrl = dog.message)
-//                    }
-//                } else {
-//                    // Error Handling
-//                    Log.e(MainViewModel::class.java.simpleName, "Failed to acquire Dog")
-//                }
-//            }
-//        }
-//    }
-
     fun loadDogs() {
         viewModelScope.launch {
-            repository.getDogs().let { data ->
-                if (data != null) {
-                    _viewState.update {
-                        it.copy(imageUrls = data.message.toList())
-                    }
-                } else {
-                    // Error Handling
-                    Log.e(MainViewModel::class.java.simpleName, "Failed to acquire Dogs")
+            val dogData = repository.getDogs()
+            if (dogData != null) {
+                _viewState.update {
+                    it.copy(imageUrls = dogData.message.toList())
                 }
+            } else {
+                // Error Handling
+                Log.e(MainViewModel::class.java.simpleName, "Failed to acquire Dogs")
             }
         }
     }
-
 }
