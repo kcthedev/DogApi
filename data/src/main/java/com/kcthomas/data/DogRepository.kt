@@ -11,9 +11,16 @@ class DogRepository {
     suspend fun getDog() = withContext(Dispatchers.IO) {
         try {
             remoteSource.getDog()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
 
+    suspend fun getDogs() = withContext(Dispatchers.IO) {
+        try {
+            remoteSource.getDogs()
+        } catch (_: Exception) {
+            null
+        }
+    }
 }
