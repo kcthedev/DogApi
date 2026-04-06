@@ -12,6 +12,6 @@ class RemoteDogSource {
         .build()
         .create(DogApi::class.java)
 
-    suspend fun getDog(): Dog? = api.getDog()
-    suspend fun getDogs(): Array<Dog> = api.getDogs()
+//    suspend fun getDog(): Dog? = api.getDog()
+    suspend fun getDogs(): Dog? = api.getDogs()
 }

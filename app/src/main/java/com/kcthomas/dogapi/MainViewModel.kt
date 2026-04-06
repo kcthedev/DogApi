@@ -43,10 +43,10 @@ class MainViewModel : ViewModel() {
 
     fun loadDogs() {
         viewModelScope.launch {
-            repository.getDogs().let { dogs ->
-                if (dogs != null) {
+            repository.getDogs().let { data ->
+                if (data != null) {
                     _viewState.update {
-                        it.copy(imageUrls = dogs.map { it.message })
+                        it.copy(imageUrls = data.message.toList())
                     }
                 } else {
                     // Error Handling
