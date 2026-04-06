@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
                     setContent {
                         DogApiTheme {
+                            // Use DI in a real-world project
                             MainScreen(viewModel = MainViewModel())
                         }
                     }
