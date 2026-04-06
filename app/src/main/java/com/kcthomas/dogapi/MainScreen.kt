@@ -35,10 +35,9 @@ fun MainScreen(viewModel: MainViewModel) {
             columns = GridCells.Fixed(2),
             modifier = Modifier.weight(1f)
         ) {
-            val urls = viewState.imageUrls
-            items(urls) { url ->
-                // Actually show placeholder while loading
-                if (viewState.isLoading) {
+            // Actually show placeholder while loading
+            if (viewState.isLoading) {
+                items(50) {
                     AsyncImage(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -48,7 +47,10 @@ fun MainScreen(viewModel: MainViewModel) {
                         error = painterResource(id = R.drawable.ic_placeholder),
                         contentDescription = "Dog Image"
                     )
-                } else {
+                }
+            } else {
+                val urls = viewState.imageUrls
+                items(urls) { url ->
                     AsyncImage(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -58,7 +60,6 @@ fun MainScreen(viewModel: MainViewModel) {
                         contentDescription = "Dog Image"
                     )
                 }
-
             }
         }
 
