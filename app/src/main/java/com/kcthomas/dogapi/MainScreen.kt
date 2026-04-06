@@ -37,15 +37,28 @@ fun MainScreen(viewModel: MainViewModel) {
         ) {
             val urls = viewState.imageUrls
             items(urls) { url ->
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f),
-                    model = url,
-                    placeholder = painterResource(id = R.drawable.ic_placeholder),
-                    error = painterResource(id = R.drawable.ic_error),
-                    contentDescription = "Dog Image"
-                )
+                // Actually show placeholder while loading
+                if (viewState.isLoading) {
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        model = null,
+                        placeholder = painterResource(id = R.drawable.ic_placeholder),
+                        error = painterResource(id = R.drawable.ic_placeholder),
+                        contentDescription = "Dog Image"
+                    )
+                } else {
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        model = url,
+                        error = painterResource(id = R.drawable.ic_error),
+                        contentDescription = "Dog Image"
+                    )
+                }
+
             }
         }
 

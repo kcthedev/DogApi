@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
 
     data class ViewState(
+        val isLoading: Boolean = false,
         val imageUrls: List<String> = emptyList()
     )
 
@@ -25,6 +26,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun loadDogs() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             val dogData = repository.getDogs()
             if (dogData != null) {
@@ -35,6 +37,7 @@ class MainViewModel : ViewModel() {
                 // Error Handling
                 Log.e(MainViewModel::class.java.simpleName, "Failed to acquire Dogs")
             }
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 }
